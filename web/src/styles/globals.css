@@ -1,0 +1,311 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   CAREER OS — DESIGN SYSTEM
+   --------------------------------------------------------------------------
+   One accent (Iris) carries every interactive affordance. A second colour
+   (Signal, an acid lime) is reserved exclusively for "the agent is live" —
+   never decorative, so its presence always means the same thing.
+   Neutrals are warm, not blue-grey, to keep the surface from reading corporate.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  --canvas:    #FBFBF9;
+  --surface:   #FFFFFF;
+  --surface-2: #F5F5F2;
+
+  --ink:   #15151A;
+  --ink-2: #55555F;
+  --ink-3: #8A8A94;
+
+  --line:   rgba(20, 20, 26, 0.09);
+  --line-2: rgba(20, 20, 26, 0.16);
+
+  --iris:      #5B47FF;
+  --iris-ink:  #4634E0;
+  --iris-soft: rgba(91, 71, 255, 0.08);
+  --iris-line: rgba(91, 71, 255, 0.22);
+
+  /* Live-agent signal only. */
+  --signal:      #9BD40B;
+  --signal-soft: rgba(155, 212, 11, 0.14);
+
+  --positive: #12855B;
+  --caution:  #A66A00;
+  --critical: #C2373B;
+
+  --positive-soft: rgba(18, 133, 91, 0.10);
+  --caution-soft:  rgba(166, 106, 0, 0.10);
+  --critical-soft: rgba(194, 55, 59, 0.09);
+
+  --shadow-sm: 0 1px 2px rgba(20, 20, 26, 0.05);
+  --shadow-md: 0 2px 6px rgba(20, 20, 26, 0.06), 0 8px 24px rgba(20, 20, 26, 0.05);
+  --shadow-lg: 0 4px 12px rgba(20, 20, 26, 0.07), 0 24px 56px rgba(20, 20, 26, 0.09);
+
+  --glass: rgba(255, 255, 255, 0.72);
+  --grid-dot: rgba(20, 20, 26, 0.055);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Deep charcoal, never #000 — the terminal feel comes from depth, not void. */
+  --canvas:    #0D0D10;
+  --surface:   #141419;
+  --surface-2: #1B1B22;
+
+  --ink:   #F0F0F2;
+  --ink-2: #A0A0AC;
+  --ink-3: #6E6E7A;
+
+  --line:   rgba(255, 255, 255, 0.08);
+  --line-2: rgba(255, 255, 255, 0.15);
+
+  --iris:      #8B7BFF;
+  --iris-ink:  #A99CFF;
+  --iris-soft: rgba(139, 123, 255, 0.13);
+  --iris-line: rgba(139, 123, 255, 0.30);
+
+  --signal:      #C6F03C;
+  --signal-soft: rgba(198, 240, 60, 0.14);
+
+  --positive: #3DD68C;
+  --caution:  #E8B33D;
+  --critical: #F2686C;
+
+  --positive-soft: rgba(61, 214, 140, 0.13);
+  --caution-soft:  rgba(232, 179, 61, 0.13);
+  --critical-soft: rgba(242, 104, 108, 0.13);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.45), 0 12px 32px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5), 0 32px 64px rgba(0, 0, 0, 0.45);
+
+  --glass: rgba(20, 20, 25, 0.72);
+  --grid-dot: rgba(255, 255, 255, 0.05);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body { overflow-x: hidden; }
+
+::selection { background: var(--iris); color: #fff; }
+
+/* --- Typography ---------------------------------------------------------- */
+
+.display {
+  font-size: clamp(42px, 7.2vw, 78px);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.042em;
+}
+
+.h1 { font-size: clamp(28px, 3.6vw, 38px); font-weight: 600; letter-spacing: -0.028em; line-height: 1.12; }
+.h2 { font-size: clamp(21px, 2.4vw, 25px); font-weight: 600; letter-spacing: -0.022em; line-height: 1.2; }
+.h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.014em; }
+
+.body-lg { font-size: 17px; line-height: 1.62; color: var(--ink-2); }
+.body    { font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+.caption { font-size: 12.5px; line-height: 1.5; color: var(--ink-3); }
+
+/* Small caps rail label — the organising device across every screen. */
+.rail {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.tnum {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* --- Surfaces ------------------------------------------------------------ */
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.panel-raised {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid var(--line);
+}
+
+/* Dotted measure field. Used behind hero and command surfaces only. */
+.grid-field {
+  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.hairline { height: 1px; background: var(--line); border: 0; }
+
+/* --- Controls ------------------------------------------------------------ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 10px;
+  font-size: 14.5px;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 140ms cubic-bezier(0.2, 0.8, 0.3, 1),
+              background 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+.btn:active { transform: scale(0.985); }
+
+.btn-primary {
+  background: var(--iris);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(20, 20, 26, 0.16), 0 6px 18px rgba(91, 71, 255, 0.26);
+}
+.btn-primary:hover { background: var(--iris-ink); box-shadow: 0 2px 4px rgba(20,20,26,.18), 0 10px 26px rgba(91,71,255,.32); }
+[data-theme="dark"] .btn-primary { color: #0D0D10; }
+
+.btn-quiet {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line-2);
+}
+.btn-quiet:hover { background: var(--surface-2); border-color: var(--ink-3); }
+
+.btn-ghost { background: transparent; color: var(--ink-2); }
+.btn-ghost:hover { background: var(--surface-2); color: var(--ink); }
+
+.btn-sm { height: 34px; padding: 0 13px; font-size: 13px; border-radius: 8px; }
+.btn-lg { height: 50px; padding: 0 26px; font-size: 15.5px; border-radius: 12px; }
+
+/* --- Chips --------------------------------------------------------------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+.chip-iris     { background: var(--iris-soft);     color: var(--iris-ink); border-color: var(--iris-line); }
+.chip-positive { background: var(--positive-soft); color: var(--positive); border-color: transparent; }
+.chip-caution  { background: var(--caution-soft);  color: var(--caution);  border-color: transparent; }
+.chip-critical { background: var(--critical-soft); color: var(--critical); border-color: transparent; }
+
+/* --- The live-agent pulse ------------------------------------------------ */
+
+.pulse {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--signal);
+  flex: none;
+}
+.pulse::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--signal);
+  animation: halo 2.4s cubic-bezier(0.2, 0.7, 0.3, 1) infinite;
+}
+@keyframes halo {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  70%  { transform: scale(3.4); opacity: 0; }
+  100% { transform: scale(3.4); opacity: 0; }
+}
+
+/* --- Motion -------------------------------------------------------------- */
+
+.rise { animation: rise 620ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.fade { animation: fade 520ms ease both; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Progressive reveal for AI-generated lines. */
+.stagger > * { animation: rise 560ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+.stagger > *:nth-child(1) { animation-delay: 60ms; }
+.stagger > *:nth-child(2) { animation-delay: 130ms; }
+.stagger > *:nth-child(3) { animation-delay: 200ms; }
+.stagger > *:nth-child(4) { animation-delay: 270ms; }
+.stagger > *:nth-child(5) { animation-delay: 340ms; }
+.stagger > *:nth-child(6) { animation-delay: 410ms; }
+.stagger > *:nth-child(7) { animation-delay: 480ms; }
+.stagger > *:nth-child(8) { animation-delay: 550ms; }
+
+.scan {
+  background: linear-gradient(90deg, transparent, var(--iris-soft) 45%, transparent);
+  background-size: 220% 100%;
+  animation: scan 2.6s ease-in-out infinite;
+}
+@keyframes scan {
+  from { background-position: 180% 0; }
+  to   { background-position: -80% 0; }
+}
+
+/* --- Accessibility ------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--iris);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
